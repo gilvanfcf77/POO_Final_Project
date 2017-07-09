@@ -3,14 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package app;
+package exceptions;
 
 /**
  *
  * @author gilvan
  */
-public class Client extends User{
-    
-    
+public class IllegalCodeException extends RuntimeException {
+
+    public IllegalCodeException(String msg) {
+        super(msg);
+    }
     
 }
