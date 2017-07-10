@@ -35,37 +35,24 @@ public class ListProducts extends javax.swing.JFrame {
          
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setNumRows(0);
-        ObjectInputStream objectIn = null;
+       
+       
         try {
-            objectIn = new ObjectInputStream(new BufferedInputStream(new FileInputStream("products.dat")));
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(ListProducts.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(ListProducts.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-       Product p = null;
-       FileIO fileIO = new FileIO();
-       ArrayList <Product> products = null;
-        try {
-            products = fileIO.readFile("products.dat");
+            for(Product prod : FileIO.readFile("products.dat")){
+                model.addRow(new Object[]{
+                    prod.getName(),
+                    prod.getPrice(),
+                    prod.getAmount(),
+                    prod.getBrand(),
+                    prod.getDescription(),
+                    prod.getCode()
+                });
+                
+            }
         } catch (IOException ex) {
             Logger.getLogger(ListProducts.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ListProducts.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        
-        for(Product prod : products){
-            model.addRow(new Object[]{
-                prod.getName(),
-                prod.getPrice(),
-                prod.getAmount(),
-                prod.getBrand(),
-                prod.getDescription(),
-                prod.getCode()
-            });
-            
         }
      
      }
@@ -130,8 +117,18 @@ public class ListProducts extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         RegisterButton.setText("Registrar Compra/Venda");
+        RegisterButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RegisterButtonActionPerformed(evt);
+            }
+        });
 
         MenuButton.setText("Menu");
+        MenuButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -164,6 +161,20 @@ public class ListProducts extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void MenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuButtonActionPerformed
+        // TODO add your handling code here:
+        Menu menu = new Menu();
+        menu.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_MenuButtonActionPerformed
+
+    private void RegisterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterButtonActionPerformed
+        // TODO add your handling code here:
+        TradingRegister tr = new TradingRegister();
+        tr.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_RegisterButtonActionPerformed
 
     /**
      * @param args the command line arguments

@@ -5,6 +5,16 @@
  */
 package view;
 
+import app.FileIO;
+import app.Product;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author gilvan
@@ -16,6 +26,29 @@ public class TradingRegister extends javax.swing.JFrame {
      */
     public TradingRegister() {
         initComponents();
+        buttonGroup1.add(SellButton);
+        buttonGroup1.add(BuyButton);
+        loadList();
+        
+    }
+    
+    
+    public void loadList(){
+        
+        DefaultComboBoxModel model = (DefaultComboBoxModel) jComboBox1.getModel();
+        FileIO fileIO = new FileIO();
+        ArrayList <Product> products = null;
+        try {
+            products = fileIO.readFile("products.dat");
+        } catch (IOException ex) {
+            Logger.getLogger(ListProducts.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ListProducts.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        for(Product prod : products){
+            model.addElement(prod.getName());
+        }       
     }
 
     /**
@@ -30,12 +63,11 @@ public class TradingRegister extends javax.swing.JFrame {
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
         buttonGroup3 = new javax.swing.ButtonGroup();
+        buttonGroup4 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         BuyButton = new javax.swing.JRadioButton();
         SellButton = new javax.swing.JRadioButton();
-        CodeLabel = new javax.swing.JLabel();
-        CodeTField = new javax.swing.JTextField();
         RegisterButton = new javax.swing.JButton();
         CancelButton = new javax.swing.JButton();
         AmountLabel = new javax.swing.JLabel();
@@ -74,9 +106,12 @@ public class TradingRegister extends javax.swing.JFrame {
 
         SellButton.setText("Venda");
 
-        CodeLabel.setText("Código:");
-
         RegisterButton.setText("Registrar");
+        RegisterButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RegisterButtonActionPerformed(evt);
+            }
+        });
 
         CancelButton.setText("Cancelar");
         CancelButton.addActionListener(new java.awt.event.ActionListener() {
@@ -89,7 +124,6 @@ public class TradingRegister extends javax.swing.JFrame {
 
         ProductLabel.setText("Produto:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -116,12 +150,10 @@ public class TradingRegister extends javax.swing.JFrame {
                         .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(AmountLabel)
-                                .addComponent(CodeLabel)
                                 .addComponent(ProductLabel))
                             .addGap(18, 18, 18)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(CodeTField, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
-                                .addComponent(AmountTField)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(AmountTField, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addComponent(SellButton)))
                 .addContainerGap(57, Short.MAX_VALUE))
@@ -142,11 +174,7 @@ public class TradingRegister extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(AmountLabel)
                     .addComponent(AmountTField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CodeLabel)
-                    .addComponent(CodeTField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(14, 14, 14)
+                .addGap(52, 52, 52)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(RegisterButton)
                     .addComponent(CancelButton))
@@ -170,6 +198,28 @@ public class TradingRegister extends javax.swing.JFrame {
         menu.setVisible(true);
         dispose();
     }//GEN-LAST:event_CancelButtonActionPerformed
+
+    private void RegisterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterButtonActionPerformed
+        // TODO add your handling code here:
+        int type;
+        if(SellButton.isSelected()){
+            type = 1;
+        }
+        else
+            type = 2;
+        
+        String name = (String) jComboBox1.getSelectedItem();
+        int amount = 0;
+        try{
+            amount = Integer.parseInt(AmountTField.getText());
+        }
+        catch(NumberFormatException nfe){
+            JOptionPane.showMessageDialog(null, "Preencha o campo Quantidade com um número. Exemplo: 10", "alert", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        FileIO.register(type, name, amount);
+        
+    }//GEN-LAST:event_RegisterButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -211,14 +261,13 @@ public class TradingRegister extends javax.swing.JFrame {
     private javax.swing.JTextField AmountTField;
     private javax.swing.JRadioButton BuyButton;
     private javax.swing.JButton CancelButton;
-    private javax.swing.JLabel CodeLabel;
-    private javax.swing.JTextField CodeTField;
     private javax.swing.JLabel ProductLabel;
     private javax.swing.JButton RegisterButton;
     private javax.swing.JRadioButton SellButton;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
+    private javax.swing.ButtonGroup buttonGroup4;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;

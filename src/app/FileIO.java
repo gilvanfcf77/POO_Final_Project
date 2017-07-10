@@ -11,6 +11,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -18,7 +20,7 @@ import java.util.ArrayList;
  */
 public class FileIO {
     
-    public ArrayList<Product> readFile(String file) throws IOException, FileNotFoundException, ClassNotFoundException {
+    public static ArrayList<Product> readFile(String file) throws IOException, FileNotFoundException, ClassNotFoundException {
         Product p;
         ArrayList<Product> list = new ArrayList<>();
         FileInputStream fileInputStream = new FileInputStream(file);
@@ -36,5 +38,41 @@ public class FileIO {
         fileInputStream.close();
         return list;
     }
-   
+    
+    public static Product searchProduct(String name){
+        Product p = null;
+        ArrayList <Product> products = null;
+        try {
+            products = FileIO.readFile("products");
+        } catch (IOException ex) {
+            Logger.getLogger(FileIO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(FileIO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        for(Product product : products){
+            
+            if(product.getName() == name){
+                p = product;
+            }
+        
+        }
+        return p;
+    
+    }
+    
+    public static void register(int type, String name, int amount){
+        Product p = FileIO.searchProduct(name);
+        try {
+            ArrayList<Product> products = FileIO.readFile("products.dat");
+        } catch (IOException ex) {
+            Logger.getLogger(FileIO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(FileIO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+    
+    }
+    
    }

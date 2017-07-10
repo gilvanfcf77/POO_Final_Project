@@ -109,6 +109,9 @@ public class Menu extends javax.swing.JFrame {
 
     private void ListProductsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListProductsActionPerformed
         // TODO add your handling code here:
+        ListProducts listProducts = new ListProducts();
+        listProducts.setVisible(true);
+        dispose();
     }//GEN-LAST:event_ListProductsActionPerformed
 
     private void AddProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddProductActionPerformed
