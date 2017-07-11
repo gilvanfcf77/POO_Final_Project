@@ -43,7 +43,7 @@ public class FileIO {
         Product p = null;
         ArrayList <Product> products = null;
         try {
-            products = FileIO.readFile("products");
+            products = FileIO.readFile("products.dat");
         } catch (IOException ex) {
             Logger.getLogger(FileIO.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -51,10 +51,14 @@ public class FileIO {
         }
         
         for(Product product : products){
-            
-            if(product.getName() == name){
-                p = product;
-            }
+  
+             System.out.println(product.getName());
+
+//            if(product.getName() == name){
+//                System.out.println(product.getName() + " = " + name);
+//                p = product;
+//                
+//            }
         
         }
         return p;
@@ -63,13 +67,17 @@ public class FileIO {
     
     public static void register(int type, String name, int amount){
         Product p = FileIO.searchProduct(name);
-        try {
-            ArrayList<Product> products = FileIO.readFile("products.dat");
-        } catch (IOException ex) {
-            Logger.getLogger(FileIO.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(FileIO.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
+        System.out.println(p.getName());
+        
+        
+//        try {
+//            ArrayList<Product> products = FileIO.readFile("products.dat");
+//        } catch (IOException ex) {
+//            Logger.getLogger(FileIO.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (ClassNotFoundException ex) {
+//            Logger.getLogger(FileIO.class.getName()).log(Level.SEVERE, null, ex);
+//        }
         
         
     

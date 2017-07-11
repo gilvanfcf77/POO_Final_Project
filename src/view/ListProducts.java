@@ -72,10 +72,12 @@ public class ListProducts extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         RegisterButton = new javax.swing.JButton();
         MenuButton = new javax.swing.JButton();
+        AddProductButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         TitleLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        TitleLabel.setForeground(new java.awt.Color(51, 51, 255));
         TitleLabel.setText("Lista de Produtos");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -116,6 +118,7 @@ public class ListProducts extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
+        RegisterButton.setForeground(new java.awt.Color(0, 0, 255));
         RegisterButton.setText("Registrar Compra/Venda");
         RegisterButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -123,10 +126,19 @@ public class ListProducts extends javax.swing.JFrame {
             }
         });
 
+        MenuButton.setForeground(new java.awt.Color(0, 0, 255));
         MenuButton.setText("Menu");
         MenuButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MenuButtonActionPerformed(evt);
+            }
+        });
+
+        AddProductButton.setForeground(new java.awt.Color(0, 0, 255));
+        AddProductButton.setText("Adicionar produto");
+        AddProductButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddProductButtonActionPerformed(evt);
             }
         });
 
@@ -143,6 +155,8 @@ public class ListProducts extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(MenuButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(AddProductButton, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(RegisterButton)))
                 .addContainerGap())
         );
@@ -155,7 +169,8 @@ public class ListProducts extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(RegisterButton)
-                    .addComponent(MenuButton))
+                    .addComponent(MenuButton)
+                    .addComponent(AddProductButton))
                 .addGap(19, 19, 19))
         );
 
@@ -175,6 +190,13 @@ public class ListProducts extends javax.swing.JFrame {
         tr.setVisible(true);
         dispose();
     }//GEN-LAST:event_RegisterButtonActionPerformed
+
+    private void AddProductButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddProductButtonActionPerformed
+        // TODO add your handling code here:
+        AddProduct add = new AddProduct();
+        add.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_AddProductButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -212,6 +234,7 @@ public class ListProducts extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AddProductButton;
     private javax.swing.JButton MenuButton;
     private javax.swing.JButton RegisterButton;
     private javax.swing.JLabel TitleLabel;

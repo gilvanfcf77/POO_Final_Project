@@ -79,6 +79,7 @@ public class AddProduct extends javax.swing.JFrame {
         });
 
         TitleLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        TitleLabel.setForeground(new java.awt.Color(0, 0, 255));
         TitleLabel.setText("Cadastro de Produto");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -98,6 +99,7 @@ public class AddProduct extends javax.swing.JFrame {
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
+        RegisterButton.setForeground(new java.awt.Color(0, 0, 255));
         RegisterButton.setText("Cadastrar");
         RegisterButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -105,7 +107,8 @@ public class AddProduct extends javax.swing.JFrame {
             }
         });
 
-        CancelButton.setText("Cancelar");
+        CancelButton.setForeground(new java.awt.Color(0, 0, 255));
+        CancelButton.setText("Menu");
         CancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CancelButtonActionPerformed(evt);

@@ -23,7 +23,8 @@ public class Product implements Serializable {
     private String brand;
     private String description;
     private int code;
-
+      
+    
     public Product() {
     }   
     
