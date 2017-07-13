@@ -73,6 +73,7 @@ public class ListProducts extends javax.swing.JFrame {
         RegisterButton = new javax.swing.JButton();
         MenuButton = new javax.swing.JButton();
         AddProductButton = new javax.swing.JButton();
+        CleanButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -142,6 +143,14 @@ public class ListProducts extends javax.swing.JFrame {
             }
         });
 
+        CleanButton.setForeground(new java.awt.Color(51, 51, 255));
+        CleanButton.setText("Limpar lista");
+        CleanButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CleanButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -152,8 +161,10 @@ public class ListProducts extends javax.swing.JFrame {
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(88, 88, 88)
                         .addComponent(MenuButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(CleanButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(AddProductButton, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -170,7 +181,8 @@ public class ListProducts extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(RegisterButton)
                     .addComponent(MenuButton)
-                    .addComponent(AddProductButton))
+                    .addComponent(AddProductButton)
+                    .addComponent(CleanButton))
                 .addGap(19, 19, 19))
         );
 
@@ -197,6 +209,16 @@ public class ListProducts extends javax.swing.JFrame {
         add.setVisible(true);
         dispose();
     }//GEN-LAST:event_AddProductButtonActionPerformed
+
+    private void CleanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CleanButtonActionPerformed
+        // TODO add your handling code here:
+        FileIO.cleanList();
+        dispose();
+        ListProducts lp = new ListProducts();
+        lp.setVisible(true);
+        
+        
+    }//GEN-LAST:event_CleanButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -235,6 +257,7 @@ public class ListProducts extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddProductButton;
+    private javax.swing.JButton CleanButton;
     private javax.swing.JButton MenuButton;
     private javax.swing.JButton RegisterButton;
     private javax.swing.JLabel TitleLabel;

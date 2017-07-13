@@ -5,6 +5,7 @@
  */
 package view;
 
+import app.FileIO;
 import app.Product;
 import exceptions.IllegalAmountException;
 import exceptions.IllegalCodeException;
@@ -261,24 +262,8 @@ public class AddProduct extends javax.swing.JFrame {
         }
  
         
-        ObjectOutputStream objectOut = null;			
-        try {
-            objectOut = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream("products.dat", true)));
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(AddProduct.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(AddProduct.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            objectOut.writeObject(product);
-        } catch (IOException ex) {
-            Logger.getLogger(AddProduct.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            objectOut.close();
-        } catch (IOException ex) {
-            Logger.getLogger(AddProduct.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        FileIO.addProduct(product);
+        
         
         JOptionPane.showMessageDialog(null, "Produto cadastrado com sucesso!");
         
